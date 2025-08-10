@@ -1,0 +1,9 @@
+# Generated files
+build/
+installation.yaml
+# User input history
+*.userdb/
+# Ignore user-specific configuration files
+*.custom.yaml
+# Runtime state storage
+user.yaml
