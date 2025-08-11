@@ -1,8 +1,6 @@
 # Rime table
 # encoding: utf-8
 # code: tabSize=32 insertSpaces=false
-#@/db_name  custom_phrase.txt
-#@/db_type	tabledb
 #
 # 码表各字段以制表符（Tab）分隔
 # 顺序为：文字、编码、权重（决定重码的次序、可选）

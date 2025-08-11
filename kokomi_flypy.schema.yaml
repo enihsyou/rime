@@ -22,9 +22,12 @@ switches:
     states: [漢字, 汉字]
   - name: ascii_punct
     states: [。，, ．，]
+  - name: tone_display #开启后在输入编码的位置实时转换为带声调全拼，不开启则采用系统配置，影响的是preedit_format,归属：super_preedit.lua
+    states: [声杳, 声起]
+    reset: 0
   - name: emoji_suggestion
     reset: 1
-    states: [ "🈚️️","🈶️️"]
+    states: ["🈚️️", "🈶️️"]
 
 engine:
   processors:
@@ -49,6 +52,8 @@ engine:
     - table_translator@custom_personal # 用户个人词典
     - script_translator
   filters:
+    - lua_filter@*corrector_filter # 错音错字提示
+    - lua_filter@*super_preedit # 输入码显示全拼并带上音调
     - simplifier@emoji_suggestion
     - simplifier
     - uniquifier
@@ -57,6 +62,14 @@ speller:
   alphabet: zyxwvutsrqponmlkjihgfedcba
   delimiter: " '"
   algebra:
+    # 万象词库（需要在双拼前应用）
+    # https://github.com/amzxyz/RIME-LMDG/wiki/%E5%B0%86%E4%B8%87%E8%B1%A1%E8%AF%8D%E5%BA%93%E8%BF%81%E7%A7%BB%E5%88%B0%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng$/eng/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/
+    - xform/ḿ/m/
+
     - erase/^xx$/
     # 小鹤双拼码表
     - derive/^([jqxy])u$/$1v/
@@ -91,15 +104,32 @@ speller:
     # 简拼支持
     # - abbrev/^(.).+$/$1/
 
-grammer:
+grammar:
   # 语言模型
-  language: wanxiang-lts-zh-hans.gram
-  collocation_max_length: 5
-  collocation_min_length: 2
+  language: wanxiang-lts-zh-hans
+  collocation_max_length: 8 #命中的最长词组
+  collocation_min_length: 2 #命中的最短词组，搭配词频健全的词库时候应当最小值设为3避开2字高频词
+  collocation_penalty: -10 #默认-12 对常见搭配词组施加的惩罚值。较高的负值会降低这些搭配被选中的概率，防止过于频繁地出现某些固定搭配。
+  non_collocation_penalty: -12 #默认-12 对非搭配词组施加的惩罚值。较高的负值会降低非搭配词组被选中的概率，避免不合逻辑或不常见的词组组合。
+  weak_collocation_penalty: -24 #默认-24 对弱搭配词组施加的惩罚值。保持默认值通常是为了有效过滤掉不太常见但仍然合理的词组组合。
+  rear_penalty: -18 #默认-18 对词组中后续词语的位置施加的惩罚值。较高的负值会降低某些词语在句子后部出现的概率，防止句子结构不自然。
 
 translator:
   dictionary: kokomi
   prism: kokomi_flypy
+  # 启用自动造词
+  enable_encoder: true
+  # 启用自动句子输入
+  enable_sentence: true
+  # 启用用户词典
+  enable_user_dict: true
+  # 对已上屏的词语进行自动编码以提高下次输入的命中率
+  encode_commit_history: true
+
+  spelling_hints: 8 # corrector.lua ：为了让错音错字提示的 Lua 同时适配全拼双拼，将拼音显示在 comment 中
+  always_show_comments: true # corrector.lua ：Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供 corrector.lua 做判断用。
+  comment_format: { comment } # 将注释以词典字符串形式完全暴露，通过super_preedit.lua完全接管，灵活配置。
+
   contextual_suggestions: true
   enable_completion: true
   max_homophones: 7
@@ -142,53 +172,14 @@ translator:
 punctuator:
   import_preset: default
   # 定义部分半角字符，方便中英混输
-  half_shape:
-      "#": "#" # Markdown 标题
-      "*": "*" # Markdown 加粗
-      "`": "`" # Markdown 代码
-      '"': '"' # 按下 Shift 说明我们要半角引号
-      "'": {pair: ["「", "」"]}
-
-# 输入状态切换
-# https://gist.github.com/lotem/2981316
-ascii_composer:
-  # CapsLock 键作为输入法切换键
-  good_old_caps_lock: false
-  switch_key:
-    # librime v1.14.0 带来了 set/unset_ascii_mode, 能实现模式按键
-    # 在此之前还是用 shift 切换吧
-    # Caps_Lock: commit_code   # 按住 CapsLock 键，已输入字符上屏，同时切换为中文输入
-    Shift_L: commit_code  # 按住左 shift 键，已输入字符上屏，同时切换为英文输入
-    Shift_R: commit_code
-    # Control_L: noop  # 按住左 control 键，已输入字符上屏，同时切换为中文输入
-
-key_binder:
-  bindings:
-  # Left Shift 切换到英文状态
-  # - { when: always, accept: Shift+Shift_L, set_option: ascii_mode }
-  # Left Control 切换到中文状态
-  # - { when: always, accept: Control+Control_L, unset_option: ascii_mode }
-
-  # Vim like keybindings from default preset
-  - {accept: "Control+p", send: Up, when: composing}
-  - {accept: "Control+n", send: Down, when: composing}
-  - {accept: "Control+b", send: Left, when: composing}
-  - {accept: "Control+f", send: Right, when: composing}
-  - {accept: "Control+a", send: Home, when: composing}
-  - {accept: "Control+e", send: End, when: composing}
-  - {accept: "Control+d", send: Delete, when: composing}
-  - {accept: "Control+k", send: "Shift+Delete", when: composing}
-  - {accept: "Control+h", send: BackSpace, when: composing}
-  - {accept: "Control+g", send: Escape, when: composing}
-  # 翻页控制
-  - {accept: minus, send: Page_Up, when: has_menu}
-  - {accept: equal, send: Page_Down, when: has_menu}
-  # 输入状态切换
-  - {accept: "Control+Shift+exclam", select: .next, when: always}
-  - {accept: "Control+Shift+at", toggle: ascii_mode, when: always}
-  - {accept: "Control+Shift+numbersign", toggle: full_shape, when: always}
-  - {accept: "Control+Shift+dollar", toggle: simplification, when: always}
-  - {accept: "Control+Shift+percent", toggle: extended_charset, when: always}
+  full_shape:
+    "#": "#" # Markdown 标题
+    "*": "*" # Markdown 加粗
+    "`": "`" # Markdown 代码
+    '"': '"' # 按下 Shift 说明我们要半角引号
+    "<": "<" # 保持半角
+    ">": ">" # 保持半角
+    "'": { pair: ["「", "」"] } # 括号
 
 recognizer:
   import_preset: default

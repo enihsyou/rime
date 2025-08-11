@@ -16,7 +16,7 @@ import_tables:
 
   # 搜狗拼音词库 https://pinyin.sogou.com/dict/
   # 使用 https://github.com/studyzy/imewlconverter 转换
-  - dicts/sogou/net.dict.yaml # 网络流行语
+  - dicts/sogou/net # 网络流行语
 
   # https://github.com/outloudvi/mw2fcitx/wiki/fcitx5-pinyin-moegirl
   - dicts/moegirl # 萌娘百科

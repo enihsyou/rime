@@ -43,7 +43,7 @@ style:
   comment_font_face: Microsoft YaHei UI # 注释字体
   font_point: 13 # 主要字体大小
   label_font_point: 13 # 标签字体大小
-  comment_font_point: 10 # 注释字体大小
+  comment_font_point: 12 # 注释字体大小
   mark_text: "" # 高亮标记字符，显示在选中的候选标签前
 
 preset_color_schemes:
