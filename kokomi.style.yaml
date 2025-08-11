@@ -1,25 +1,18 @@
-# Weasel settings
-# encoding: utf-8
-# thanks to https://github.com/LufsX/rime
-
-config_version: "2025-08-11"
-
 app_options:
   cmd.exe:
     ascii_mode: true
   conhost.exe:
     ascii_mode: true
+  bash.exe:
+    ascii_mode: true
+  powershell.exe:
+    ascii_mode: true
+  WindowsTerminal.exe:
+    ascii_mode: true
   Code.exe:
     ascii_mode: true
   firefox.exe:
     inline_preedit: true # 解决 Firefox 无法输入的问题 https://github.com/rime/weasel/issues/946
-
-# 显示状态变化的通知
-show_notifications: true
-# 通知显示多长时间
-show_notifications_time: 1200
-# 使用全局 ascii 状态
-global_ascii: false
 
 style:
   color_scheme: win11_weasel # 主题方案
@@ -31,32 +24,33 @@ style:
   # 以下是其它的设置
   color_format: abgr # https://github.com/rime/weasel/issues/1662#issuecomment-3153772198
 
-  antialias_mode: default # 抗锯齿模式
+  antialias_mode: default # 次像素反锯齿设定：default；force_dword；cleartype；grayscale；aliased
   ascii_tip_follow_cursor: false # 切换 ASCII 模式时，提示跟随光标
   display_tray_icon: false # 显示系统托盘图标
-  fullscreen: false # 演示模式（全屏的輸入窗口）
+  fullscreen: false # 候选窗口全屏显示
 
   click_to_capture: true # 点击输入法时捕获截图到剪贴板
   hover_type: semi_hilite # 鼠标悬停行为 none(无动作); hilite(选中鼠标下的候选); semi_hilite(高亮鼠标下的候选)
-  paging_on_scroll: false # 鼠标滚轮翻页候选栏
+  paging_on_scroll: true # 鼠标滚轮翻页候选栏
 
   inline_preedit: true # 在光标位置显示预编辑文本
   preedit_type: composition # 预编辑文本类型 composition(编码); preview(高亮候选); preview_all(全部候选)
   candidate_abbreviate_length: 0 # 最长候选长度，多出来的将被…代替，值为 0 或将这行注释禁用此功能
 
   horizontal: true # 水平排列候选栏
-  font_face: Segoe UI Emoji:30:39, Noto Color Emoji, Microsoft YaHei UI # 主要字体
+  font_face: Segoe UI Emoji:30:39, Segoe UI Emoji:23:23, Segoe UI Emoji:2a:2a, Segoe UI Emoji:fe0f:fe0f, Segoe UI Emoji:20e3:20e3, Microsoft YaHei, SF Pro, Segoe UI Emoji, Noto Color Emoji
   label_font_face: Microsoft YaHei UI # 标签字体
   comment_font_face: Microsoft YaHei UI # 注释字体
   font_point: 13 # 主要字体大小
   label_font_point: 13 # 标签字体大小
-  comment_font_point: 13 # 注释字体大小
+  comment_font_point: 10 # 注释字体大小
   mark_text: "" # 高亮标记字符，显示在选中的候选标签前
 
 preset_color_schemes:
 
   win11_weasel:
     name: "Windows 11 浅色"
+    author: 九条涼果 <enihsyou@gmail.com>
     back_color: 0xF9F9F9
     border_color: 0xE7E7E7
     hilited_candidate_back_color: 0xF0F0F0
@@ -68,6 +62,7 @@ preset_color_schemes:
 
   win11_weasel_dark:
     name: "Windows 11 浅色／深色"
+    author: 九条涼果 <enihsyou@gmail.com>
     back_color: 0x2C2C2C
     border_color: 0x222222
     candidate_text_color: 0xFFFFFF
@@ -79,7 +74,7 @@ preset_color_schemes:
     text_color: 0xF9F9F9
 
 win11_preset:
-  label_format: "\u2006%s"
+  label_format: "%s"
   layout:
     align_type: center
     baseline: 0

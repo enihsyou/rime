@@ -14,3 +14,4 @@
 - [Rime 双拼方案](https://github.com/rime/rime-double-pinyin)
 - [Oh-My-Rime 薄荷输入法](https://www.mintimate.cc/)
 - [LufsX/rime](https://github.com/LufsX/rime)
+- [ASC8384/myRime](https://github.com/ASC8384/myRime)

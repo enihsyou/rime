@@ -1,0 +1,14 @@
+patch:
+  # 显示状态变化的通知
+  show_notifications: true
+  # 通知显示多长时间
+  show_notifications_time: 1200
+  # 切换为 ascii 模式时，是否影响所有窗口
+  global_ascii: true
+
+  app_options/+:
+    __include: kokomi.style.yaml:/app_options
+  style/+:
+    __include: kokomi.style.yaml:/style
+  preset_color_schemes/+:
+    __include: kokomi.style.yaml:/preset_color_schemes
