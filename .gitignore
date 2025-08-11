@@ -7,3 +7,5 @@ installation.yaml
 *.custom.yaml
 # Runtime state storage
 user.yaml
+# Sync data is handled separately
+sync/
