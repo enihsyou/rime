@@ -1,9 +1,8 @@
 # Rime table
 # encoding: utf-8
-# code: tabSize=8 insertSpaces=false
-#
-# 请将该文件以UTF-8编码保存为
-# Rime用户文件夹/custom_phrase.txt
+# code: tabSize=32 insertSpaces=false
+#@/db_name  custom_phrase.txt
+#@/db_type	tabledb
 #
 # 码表各字段以制表符（Tab）分隔
 # 顺序为：文字、编码、权重（决定重码的次序、可选）
@@ -24,6 +23,17 @@ Rime	rime	3
 Android	android
 Apple	apple
 Apple ID	appleid
+Apple Music	am	2
+AiMesh	am	1
+AirPods	ap	4
+Apple Pay	ap	3
+Alipay	ap	2
+Apple TV	atv
+Apple Watch	aw
+App Store	as	2
+Apple Store	as	1
+AC86U	ac	2
+AppleCare+	ac	1
 Clash	clash
 Cloudflare	cloudflare
 Cloudflare Workers	cloudflareworkers
@@ -33,12 +43,16 @@ Docker	docker
 GBK	gbk
 GitHub	github
 Google	google
+Google Pay	gp
+Google Play	gp	2
+Google Voice	gv
+Gmail	gm
+Gboard	gb
 Linux	linux
 HTML	html
 iCloud	icloud
 iMac	imac
 iOS	ios
-iPad	ipad
 iPad	ipad
 iPhone	iphone
 iPhone Xʀ	iphonexr
@@ -65,9 +79,13 @@ macOS Catalina	macos	3
 macOS Mojave	macos	2
 macOS High Sierra	macos	1
 Magisk	magisk
+Markdown	md
+Microsoft	mic	2
+Microsoft Office	mic	1
 Minecraft	minecraft
 MySQL	mysql
-Objective-C	ojbc
+Netflix	nf
+Objective-C	objc
 OneDrive	onedrive
 OS X	osx
 Pixel	pixel
@@ -80,9 +98,12 @@ Stash	stash
 Surge	surge
 Swift	swift
 Tailscale	tailscale
+Telegram	tg
 TypeScript	typescript
 T恤	txu
-UTF-8	utfba
+UTF-8	utf	3
+UTF-16	utf	2
+UTF-32	utf	1
 U盘	upj
 WeChat	wechat
 Wi-Fi	wifi
@@ -92,4 +113,40 @@ X-Ray	xray
 Xbox	xbox
 Xbox One	xboxone
 YouTube	youtube
+YouTube Premium	yp
 ZeroTier	zerotier
+Numbers	nb	1
+1Password	one	2
+OneDrive	one	1
+openwrt	ow
+Option	ot
+Outlook	ol	2
+outlook.com	ol	1
+Photoshop	ps
+Pro	pro
+Safari	sf	2
+Shift	sf	1
+SSD	ssd	2
+Spotify	sp	1
+Spark	sp	2
+Sublime Text	sbt
+TeamViewer	tv
+Telegram	tg	100
+Thunderbolt	thunder
+Thunderbolt Bridge	thunderbolt
+Thunderbolt Ethernet	thunderbolt
+Type-C	tc
+Typora	ty
+USB-C	usb	1
+USB-A	usb	2
+VirtualBox	vbox
+Visual Studio Code	vscode
+VSCode	vscode
+WireGuard	wg
+YouTube Music	ytbm
+YouTube Premium	ytbp
+	apple
+ MUSIC	imusic
+ PAY	ipay
+ tv 4K	atv
+ WATCH	iwatch

@@ -1,30 +1,22 @@
 # Rime dictionary
 # encoding: utf-8
-# code: tabSize=8 insertSpaces=false
 ---
 name: kokomi
 version: "2025-08-11"
 sort: by_weight
+use_preset_vocabulary: false
 
 import_tables:
-  # 覆盖词频
-  - dicts/simp # 最小拼音词典
+  # 万象拼音词库
+  - dicts/wanxiang/chars        # 单字词库
+  - dicts/wanxiang/base         # 基础词库
+  - dicts/wanxiang/correlation  # 关联词库
+  - dicts/wanxiang/compatible   # 兼容词库
+  - dicts/wanxiang/corrections  # 错音错字
 
-  - dicts/thuocl_animal # 动物
-  - dicts/thuocl_caijing # 财经
-  - dicts/thuocl_food # 饮食
-  - dicts/thuocl_idiom # 成语俗语
-  - dicts/thuocl_IT # IT
-  - dicts/thuocl_medical # 医学
-  - dicts/thuocl_renmingdiming # 人名地名
+  # 搜狗拼音词库 https://pinyin.sogou.com/dict/
+  # 使用 https://github.com/studyzy/imewlconverter 转换
+  - dicts/sogou/net.dict.yaml # 网络流行语
 
-  - dicts/simp-ext # 原字表中除单字外部分
-  - dicts/sogou_net # 网络流行语
-
-  # 一点点小小的私货，不需要的可以自行关闭~
+  # https://github.com/outloudvi/mw2fcitx/wiki/fcitx5-pinyin-moegirl
   - dicts/moegirl # 萌娘百科
-  - dicts/sogou_touhou # 东方 Project
-  - dicts/sogou_minecraft # Minecraft 词条
-
-  # emoji 补全词库
-  - dicts/emoji

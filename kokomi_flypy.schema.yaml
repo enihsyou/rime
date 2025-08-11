@@ -14,6 +14,7 @@ schema:
 
 switches:
   - name: ascii_mode
+    reset: 1
     states: [中文, 西文]
   - name: full_shape
     states: [半角, 全角]
@@ -21,6 +22,9 @@ switches:
     states: [漢字, 汉字]
   - name: ascii_punct
     states: [。，, ．，]
+  - name: emoji_suggestion
+    reset: 1
+    states: [ "🈚️️","🈶️️"]
 
 engine:
   processors:
@@ -42,8 +46,10 @@ engine:
     - punct_translator
     - reverse_lookup_translator
     - table_translator@custom_phrase # 用户自定义词典
+    - table_translator@custom_personal # 用户个人词典
     - script_translator
   filters:
+    - simplifier@emoji_suggestion
     - simplifier
     - uniquifier
 
@@ -83,7 +89,13 @@ speller:
     - xform/in$/B/
     - xlit/QWRTYUIOPSDFGHJKLZXCVBNM/qwrtyuiopsdfghjklzxcvbnm/
     # 简拼支持
-    - abbrev/^(.).+$/$1/
+    # - abbrev/^(.).+$/$1/
+
+grammer:
+  # 语言模型
+  language: wanxiang-lts-zh-hans.gram
+  collocation_max_length: 5
+  collocation_min_length: 2
 
 translator:
   dictionary: kokomi
@@ -91,6 +103,7 @@ translator:
   contextual_suggestions: true
   enable_completion: true
   max_homophones: 7
+  max_homographs: 7
   preedit_format:
     # 這段代碼用來將輸入的雙拼碼反轉爲全拼顯示；待見雙拼碼的可以把這段拿掉
     - xform/([bpmfdtnljqx])n/$1iao/
@@ -128,6 +141,13 @@ translator:
 
 punctuator:
   import_preset: default
+  # 定义部分半角字符，方便中英混输
+  half_shape:
+      "#": "#" # Markdown 标题
+      "*": "*" # Markdown 加粗
+      "`": "`" # Markdown 代码
+      '"': '"' # 按下 Shift 说明我们要半角引号
+      "'": {pair: ["「", "」"]}
 
 # 输入状态切换
 # https://gist.github.com/lotem/2981316
@@ -139,6 +159,7 @@ ascii_composer:
     # 在此之前还是用 shift 切换吧
     # Caps_Lock: commit_code   # 按住 CapsLock 键，已输入字符上屏，同时切换为中文输入
     Shift_L: commit_code  # 按住左 shift 键，已输入字符上屏，同时切换为英文输入
+    Shift_R: commit_code
     # Control_L: noop  # 按住左 control 键，已输入字符上屏，同时切换为中文输入
 
 key_binder:
@@ -177,10 +198,25 @@ recognizer:
 simplifier:
   show_in_comment: true
 
+# https://github.com/rime/rime-emoji/blob/master/emoji_suggestion.yaml
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: all
+  inherit_comment: false
+
 custom_phrase:
   dictionary: ""
-  user_dict: custom_phrase
+  user_dict: dicts/custom_phrase
   db_class: stabledb
   enable_completion: false
-  enable_sentence: true
+  enable_sentence: false
+  initial_quality: 1
+
+custom_personal:
+  dictionary: ""
+  user_dict: dicts/custom_personal
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
   initial_quality: 1

@@ -1,0 +1,8 @@
+
+version: 3
+
+includes:
+  download-wanxiang-gram:
+    desc: Download wanxiang-lts-zh-hans.gram
+    cmds:
+      - wget https://gh-proxy.com/https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram
