@@ -47,7 +47,7 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
-    - reverse_lookup_translator
+    # - reverse_lookup_translator
     - table_translator@custom_phrase # 用户自定义词典
     - table_translator@custom_personal # 用户个人词典
     - script_translator
@@ -172,7 +172,7 @@ translator:
 punctuator:
   import_preset: default
   # 定义部分半角字符，方便中英混输
-  full_shape:
+  full_shape: &punctuator
     "#": "#" # Markdown 标题
     "*": "*" # Markdown 加粗
     "`": "`" # Markdown 代码
@@ -180,6 +180,7 @@ punctuator:
     "<": "<" # 保持半角
     ">": ">" # 保持半角
     "'": { pair: ["「", "」"] } # 括号
+  half_shape: *punctuator
 
 recognizer:
   import_preset: default

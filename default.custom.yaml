@@ -1,9 +1,3 @@
-customization:
-  distribution_code_name: Weasel
-  distribution_version: 0.17.4
-  generator: "Rime::SwitcherSettings"
-  modified_time: "Mon Aug 11 03:36:57 2025"
-  rime_version: 1.13.1
 patch:
   schema_list:
     - schema: luna_pinyin_simp
@@ -23,11 +17,11 @@ patch:
     switch_key:
       # librime v1.14.0 带来了 set/unset_ascii_mode, 能实现模式按键
       # 在此之前还是用 shift 切换吧
-      Caps_Lock: clear # 按住 CapsLock 键，已输入字符上屏，同时切换为中文输入
-      Shift_L: clear # 按住左 shift 键，已输入字符上屏，同时切换为英文输入
+      Caps_Lock: commit_code # 已输入字符上屏，同时切换模式
+      Shift_L: noop
       Shift_R: noop
-      Control_L: noop
-      Control_R: clear # 按住右 control 键，直接切换模式
+      Control_L: clear # 直接切换模式
+      Control_R: noop
 
   key_binder:
     bindings:
