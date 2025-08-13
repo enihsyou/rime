@@ -1,0 +1,42 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: kokomi_en
+  name: Easy English Nano
+  version: "2025-08-14"
+  author:
+    - Patrick <ipatrickmac@gmail.com>
+    - tumuyan <tumuyan@21cn.com>
+    - Customized by 九条涼果 <enihsyou@gmail.com>
+  description:
+    Easy English Nano，只包含少量常用词汇，方便中英文混合输入度方案调用。
+
+engine:
+  processors:
+    - ascii_composer
+    - key_binder
+    - speller
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - table_translator
+    - punct_translator
+  filters:
+    - uniquifier
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
+  delimiter: " '"
+
+# 主翻译器，英文
+translator:
+  dictionary: kokomi.en
+  spelling_hints: 9

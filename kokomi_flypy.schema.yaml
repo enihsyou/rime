@@ -11,6 +11,9 @@ schema:
     - Customized by 九条涼果 <enihsyou@gmail.com>
   description: |
     小鹤双拼方案。
+  dependencies:
+    # 依赖它生成的 kokomi.en.table.bin
+    - kokomi_en
 
 switches:
   - name: ascii_mode
@@ -22,9 +25,10 @@ switches:
     states: [漢字, 汉字]
   - name: ascii_punct
     states: [。，, ．，]
-  - name: tone_display #开启后在输入编码的位置实时转换为带声调全拼，不开启则采用系统配置，影响的是preedit_format,归属：super_preedit.lua
-    states: [声杳, 声起]
+  # 开启后在输入编码的位置实时转换为带声调全拼，不开启则采用系统配置，影响的是preedit_format,归属：super_preedit.lua
+  - name: tone_display
     reset: 0
+    states: [声杳, 声起]
   - name: emoji_suggestion
     reset: 1
     states: ["🈚️️", "🈶️️"]
@@ -47,7 +51,7 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
-    # - reverse_lookup_translator
+    - table_translator@translator_en # 英文词典
     - table_translator@translator_custom_phrase # 用户自定义词典
     - table_translator@translator_custom_private # 用户个人词典
     - script_translator
@@ -117,7 +121,6 @@ grammar:
 # 主翻译器，拼音
 translator:
   dictionary: kokomi.cn
-  prism: kokomi_flypy
   # 拼音的权重应该比英文大
   initial_quality: 1.2
   # 启用自动造词
@@ -171,6 +174,19 @@ translator:
     - "xform/(^|[ '])u/$1sh/"
     - xform/([jqxy])v/$1u/
     - xform/([nl])v/$1ü/
+
+# 次翻译器，英文
+translator_en:
+  dictionary: kokomi.en
+  # 禁止造句
+  enable_sentence: false
+  # 禁用用户词典
+  enable_user_dict: false
+  # 自动完成单词
+  enable_completion: true
+  # 自定义提示码
+  comment_format:
+    - xform/.*// # 清空提示码
 
 punctuator:
   import_preset: default

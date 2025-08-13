@@ -1,0 +1,12 @@
+# Rime dictionary
+# encoding: utf-8
+# fork: https://github.com/iDvel/rime-ice/blob/main/melt_eng.dict.yaml
+---
+name: kokomi.en
+version: "2025-08-14"
+sort: by_weight
+use_preset_vocabulary: true
+
+import_tables:
+  - dicts/rime_ice/en_ext   # 白霜词库-英文扩展
+  - dicts/rime_ice/en       # 白霜词库-英文Base
