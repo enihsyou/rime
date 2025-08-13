@@ -1,8 +1,56 @@
-
 version: 3
 
-includes:
-  download-wanxiang-gram:
-    desc: Download wanxiang-lts-zh-hans.gram
+tasks:
+  download-assets:
+    desc: 从互联网下载词典等大型资源
+    deps:
+      - download-wanxiang
+      - download-ice
+      - download-moegirl
+      - download-sogou
+
+  download-wanxiang:
+    desc: 下载万象词库.
     cmds:
-      - wget https://gh-proxy.com/https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram
+      - wget --continue https://gh-proxy.com/https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram
+      - wget --continue https://gh-proxy.com/https://github.com/amzxyz/RIME-LMDG/releases/download/dict-nightly/dicts.zip
+      - 7z e dicts.zip -aoa -odicts/wanxiang -- '*/base*' '*/c*'
+      - C:/Program\ Files/Git/usr/bin/rm.exe dicts.zip
+
+  download-ice:
+    desc: 下载白霜拼音词库
+    cmds:
+      - wget --continue https://gh-proxy.com/https://github.com/gaboolic/rime-frost/blob/master/en_dicts/en.dict.yaml     --directory-prefix=dicts/rime_ice/
+      - wget --continue https://gh-proxy.com/https://github.com/gaboolic/rime-frost/blob/master/en_dicts/en_ext.dict.yaml --directory-prefix=dicts/rime_ice/
+
+  download-moegirl:
+    desc: 下载萌娘百科词库
+    cmds:
+      - wget --continue https://gh-proxy.com/https://github.com/outloudvi/mw2fcitx/releases/download/20250810/moegirl.dict.yaml --directory-prefix=dicts/
+
+  download-sogou:
+    desc: 下载搜狗词库
+    cmds:
+      - wget --continue "https://pinyin.sogou.com/d/dict/download_cell.php?id=4&name=%E7%BD%91%E7%BB%9C%E6%B5%81%E8%A1%8C%E6%96%B0%E8%AF%8D&f=detail" -O 网络流行新词.scel
+      - wget --continue https://gh-proxy.com/https://github.com/studyzy/imewlconverter/releases/download/v3.2.0/imewlconverter_Windows.zip
+      - 7z e imewlconverter_Windows.zip -aoa -oimewlconverter
+      - C:/Program\ Files/Git/usr/bin/rm.exe imewlconverter_Windows.zip
+      - ./imewlconverter/深蓝词库转换.exe -i:scel 网络流行新词.scel -o:rime 网络流行新词.txt
+      - |
+        bat << EOF > net-header.txt
+        # Rime dictionary
+        # encoding: utf-8
+        # code: tabSize=32 insertSpaces=false
+        # source: https://pinyin.sogou.com/dict/detail/index/4
+        ---
+        name: net
+        version: "0"
+        sort: by_weight
+        ...
+        EOF
+      # if https://github.com/go-task/task/pull/2360 got merged, we have cat,
+      # rm and mkdir, which make core-utils commands no hassle.
+      - C:/Program\ Files/Git/usr/bin/mkdir.exe dicts/sogou
+      - bat net-header.txt 网络流行新词.txt > dicts/sogou/net.dict.yaml
+      - C:/Program\ Files/Git/usr/bin/rm.exe 网络流行新词.scel net-header.txt 网络流行新词.txt
+      - C:/Program\ Files/Git/usr/bin/rm.exe -rf imewlconverter
