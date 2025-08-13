@@ -1,7 +1,7 @@
 # Rime dictionary
 # encoding: utf-8
 ---
-name: kokomi
+name: kokomi.cn
 version: "2025-08-11"
 sort: by_weight
 use_preset_vocabulary: false

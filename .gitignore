@@ -8,7 +8,7 @@ user.yaml
 # Sync data is handled separately
 sync/
 # Files that contain persional data
-dicts/custom_personal.txt
+dicts/custom_private.txt
 
 # Files that are too large to commit
 # download with `task download-wanxiang-gram`

@@ -48,8 +48,8 @@ engine:
   translators:
     - punct_translator
     # - reverse_lookup_translator
-    - table_translator@custom_phrase # 用户自定义词典
-    - table_translator@custom_personal # 用户个人词典
+    - table_translator@translator_custom_phrase # 用户自定义词典
+    - table_translator@translator_custom_private # 用户个人词典
     - script_translator
   filters:
     - lua_filter@*corrector_filter # 错音错字提示
@@ -114,9 +114,12 @@ grammar:
   weak_collocation_penalty: -24 #默认-24 对弱搭配词组施加的惩罚值。保持默认值通常是为了有效过滤掉不太常见但仍然合理的词组组合。
   rear_penalty: -18 #默认-18 对词组中后续词语的位置施加的惩罚值。较高的负值会降低某些词语在句子后部出现的概率，防止句子结构不自然。
 
+# 主翻译器，拼音
 translator:
-  dictionary: kokomi
+  dictionary: kokomi.cn
   prism: kokomi_flypy
+  # 拼音的权重应该比英文大
+  initial_quality: 1.2
   # 启用自动造词
   enable_encoder: true
   # 启用自动句子输入
@@ -197,18 +200,26 @@ emoji_suggestion:
   tips: all
   inherit_comment: false
 
-custom_phrase:
+# 副词典 - 自定义词语
+translator_custom_phrase:
   dictionary: ""
   user_dict: dicts/custom_phrase
   db_class: stabledb
+  # 补全提示
   enable_completion: false
+  # 禁止造句
   enable_sentence: false
-  initial_quality: 1
+  # 自造词优先
+  initial_quality: 20
 
-custom_personal:
+# 副词典 - 私密信息
+translator_custom_private:
   dictionary: ""
-  user_dict: dicts/custom_personal
+  user_dict: dicts/custom_private
   db_class: stabledb
+  # 补全提示
   enable_completion: false
+  # 禁止造句
   enable_sentence: false
-  initial_quality: 1
+  # 自造词优先
+  initial_quality: 30
