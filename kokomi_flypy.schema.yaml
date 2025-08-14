@@ -58,12 +58,14 @@ engine:
   filters:
     - lua_filter@*corrector_filter # 错音错字提示
     - lua_filter@*super_preedit # 输入码显示全拼并带上音调
+    - lua_filter@*tag_user_dict # 标记用户的短语和词典
     - simplifier@emoji_suggestion
     - simplifier
     - uniquifier
 
 speller:
-  alphabet: zyxwvutsrqponmlkjihgfedcba
+  # 允许大写字母开头输入英语
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
   delimiter: " '"
   algebra:
     # 万象词库（需要在双拼前应用）
@@ -239,3 +241,16 @@ translator_custom_private:
   enable_sentence: false
   # 自造词优先
   initial_quality: 30
+
+# 词库提示
+tag_user_dict:
+  # 用户词典表示
+  user_table: '🧬'
+  # 自动补全
+  completion: '🧠'
+  # 自动造句
+  sentence: '💬'
+  # 默认短语
+  phrase: ''
+  # 用户短语
+  user_phrase: '🧑‍💻'
