@@ -63,6 +63,10 @@ engine:
     - simplifier
     - uniquifier
 
+key_binder:
+  # 需要 import 才能生效
+  import_preset: default
+
 speller:
   # 允许大写字母开头输入英语
   alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA

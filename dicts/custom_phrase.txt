@@ -32,6 +32,7 @@ App Store	as	2
 Apple Store	as	1
 AC86U	ac	2
 AppleCare+	ac	1
+B站	bvj
 Clash	clash
 Cloudflare	cloudflare
 Cloudflare Workers	cloudflareworkers
@@ -84,6 +85,7 @@ Minecraft	minecraft
 MySQL	mysql
 Netflix	nf
 Objective-C	objc
+Obsidian	obsidian
 OneDrive	onedrive
 OS X	osx
 Pixel	pixel

@@ -23,6 +23,7 @@ patch:
       Control_L: clear # 直接切换模式
       Control_R: noop
 
+  # 注意需要在特定配置中使用 import_preset: default 才能生效
   key_binder:
     bindings:
       # Left Shift 切换到英文状态
@@ -44,6 +45,8 @@ patch:
       # 翻页控制
       - { when: has_menu, accept: minus, send: Page_Up }
       - { when: has_menu, accept: equal, send: Page_Down }
+      - { when: paging, accept: bracketleft, send: Page_Up }
+      - { when: has_menu, accept: bracketright, send: Page_Down }
       # 输入状态切换
       - { when: always, accept: "Control+Shift+exclam", select: .next }
       # - { when: always, accept: "Control+Shift+at", toggle: ascii_mode }
