@@ -20,8 +20,8 @@ tasks:
   download-ice:
     desc: 下载白霜拼音词库
     cmds:
-      - wget --continue https://gh-proxy.com/https://github.com/gaboolic/rime-frost/blob/master/en_dicts/en.dict.yaml     --directory-prefix=dicts/rime_ice/
-      - wget --continue https://gh-proxy.com/https://github.com/gaboolic/rime-frost/blob/master/en_dicts/en_ext.dict.yaml --directory-prefix=dicts/rime_ice/
+      - wget --continue --directory-prefix=dicts/rime_ice/ https://gh-proxy.com/https://github.com/gaboolic/rime-frost/blob/master/en_dicts/en.dict.yaml
+      - wget --continue --directory-prefix=dicts/rime_ice/ https://gh-proxy.com/https://github.com/gaboolic/rime-frost/blob/master/en_dicts/en_ext.dict.yaml
 
   download-moegirl:
     desc: 下载萌娘百科词库
@@ -54,3 +54,10 @@ tasks:
       - bat net-header.txt 网络流行新词.txt > dicts/sogou/net.dict.yaml
       - C:/Program\ Files/Git/usr/bin/rm.exe 网络流行新词.scel net-header.txt 网络流行新词.txt
       - C:/Program\ Files/Git/usr/bin/rm.exe -rf imewlconverter
+
+  download-emoji:
+    desc: 下载表情词库
+    cmds:
+      - wget --continue --directory-prefix=opencc https://gh-proxy.com/https://github.com/Mintimate/oh-my-rime/blob/main/opencc/emoji.txt
+      - wget --continue --directory-prefix=opencc https://gh-proxy.com/https://github.com/Mintimate/oh-my-rime/blob/main/opencc/others.txt
+      - wget --continue --directory-prefix=opencc https://gh-proxy.com/https://github.com/Mintimate/oh-my-rime/blob/main/opencc/spoken.txt
