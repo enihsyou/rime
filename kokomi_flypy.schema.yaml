@@ -82,36 +82,38 @@ speller:
 
     - erase/^xx$/
     # 小鹤双拼码表
+    # 使用 Ⓠ 而不是 q 是为了支持中英混输
     - derive/^([jqxy])u$/$1v/
     - derive/^([aoe])([ioun])$/$1$1$2/
     - xform/^([aoe])(ng)?$/$1$1$2/
-    - xform/iu$/Q/
-    - xform/(.)ei$/$1W/
-    - xform/uan$/R/
-    - xform/[uv]e$/T/
-    - xform/un$/Y/
-    - xform/^sh/U/
-    - xform/^ch/I/
-    - xform/^zh/V/
-    - xform/uo$/O/
-    - xform/ie$/P/
-    - xform/i?ong$/S/
-    - xform/ing$|uai$/K/
-    - xform/(.)ai$/$1D/
-    - xform/(.)en$/$1F/
-    - xform/(.)eng$/$1G/
-    - xform/[iu]ang$/L/
-    - xform/(.)ang$/$1H/
-    - xform/ian$/M/
-    - xform/(.)an$/$1J/
-    - xform/(.)ou$/$1Z/
-    - xform/[iu]a$/X/
-    - xform/iao$/N/
-    - xform/(.)ao$/$1C/
-    - xform/ui$/V/
-    - xform/in$/B/
-    - xlit/QWRTYUIOPSDFGHJKLZXCVBNM/qwrtyuiopsdfghjklzxcvbnm/
+    - xform/iu$/Ⓠ/
+    - xform/(.)ei$/$1Ⓦ/
+    - xform/uan$/Ⓡ/
+    - xform/[uv]e$/Ⓣ/
+    - xform/un$/Ⓨ/
+    - xform/^sh/Ⓤ/
+    - xform/^ch/Ⓘ/
+    - xform/^zh/Ⓥ/
+    - xform/uo$/Ⓞ/
+    - xform/ie$/Ⓟ/
+    - xform/(.)i?ong$/$1Ⓢ/
+    - xform/ing$|uai$/Ⓚ/
+    - xform/(.)ai$/$1Ⓓ/
+    - xform/(.)en$/$1Ⓕ/
+    - xform/(.)eng$/$1Ⓖ/
+    - xform/[iu]ang$/Ⓛ/
+    - xform/(.)ang$/$1Ⓗ/
+    - xform/ian$/Ⓜ/
+    - xform/(.)an$/$1Ⓙ/
+    - xform/(.)ou$/$1Ⓩ/
+    - xform/[iu]a$/Ⓧ/
+    - xform/iao$/Ⓝ/
+    - xform/(.)ao$/$1Ⓒ/
+    - xform/ui$/Ⓥ/
+    - xform/in$/Ⓑ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
     # 简拼支持
+    # 开启后会导致 3 个字母时 kj'x 变成 k'jx 的问题
     # - abbrev/^(.).+$/$1/
 
 grammar:
@@ -213,6 +215,9 @@ recognizer:
   import_preset: default
   patterns:
     reverse_lookup: "`[a-z]*'?$"
+    # 覆写默认的 uppercase 使其可以在输入大写后，输入数字
+    # 比如 IPv6 处在第二个候选位，不设置这个按 2 会无法选中它且候选窗变成了 IPv2
+    uppercase: ""
 
 simplifier:
   show_in_comment: true
@@ -251,12 +256,12 @@ translator_custom_private:
 # 词库提示
 tag_user_dict:
   # 用户词典表示
-  user_table: '🧬'
+  user_table: "🧬"
   # 自动补全
-  completion: '🧠'
+  completion: "🧠"
   # 自动造句
-  sentence: '💬'
+  sentence: "💬"
   # 默认短语
-  phrase: ''
+  phrase: ""
   # 用户短语
-  user_phrase: '🧑‍💻'
+  user_phrase: "🧑‍💻"
