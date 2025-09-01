@@ -13,6 +13,8 @@ app_options:
     ascii_mode: true
   Code.exe:
     ascii_mode: true
+  idea64.exe:
+    ascii_mode: true
   Obsidian.exe:
     ascii_mode: true
   gvim.exe:

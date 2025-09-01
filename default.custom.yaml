@@ -29,6 +29,8 @@ patch:
     bindings:
       # 长按 Shift 切换到英文状态，为避免和快捷键冲突使用右侧按键
       - { when: always, accept: Shift+Shift_R, set_option: ascii_mode }
+      # 实践中每次使用 Shift 输入大写开头的字符时，都会想要输入一串英文
+      # - { when: always, accept: Shift+Shift_L, set_option: ascii_mode }
       # 长按 Control 切换到中文状态
       - { when: always, accept: Control+Control_R, unset_option: ascii_mode }
 
@@ -49,7 +51,7 @@ patch:
       - { when: paging, accept: bracketleft, send: Page_Up }
       - { when: has_menu, accept: bracketright, send: Page_Down }
       # 输入状态切换
-      - { when: always, accept: "Control+Shift+exclam", select: .next }
+      # - { when: always, accept: "Control+Shift+exclam", select: .next }
       # - { when: always, accept: "Control+Shift+at", toggle: ascii_mode }
       # - { when: always, accept: "Control+Shift+numbersign", toggle: full_shape }
       # - { when: always, accept: "Control+Shift+dollar", toggle: simplification }
