@@ -35,6 +35,7 @@ switches:
 
 engine:
   processors:
+    - lua_processor@*reset_ascii_mode # 切换应用重置中英状态
     - ascii_composer
     - recognizer
     - key_binder
@@ -178,7 +179,8 @@ translator:
     - xform/(\w)m/$1ian/
     - xform/([aoe])\1(\w)/$1$2/
     - "xform/(^|[ '])v/$1zh/"
-    - "xform/(^|[ '])i/$1ch/"
+    # 经常意外地在 Vim 模式用中文状态按 'i' 键看到输出 'ch'，关闭转换
+    # - "xform/(^|[ '])i/$1ch/"
     - "xform/(^|[ '])u/$1sh/"
     - xform/([jqxy])v/$1u/
     - xform/([nl])v/$1ü/
@@ -208,6 +210,7 @@ punctuator:
     ">": ">" # 保持半角
     "[": "[" # 保持半角
     "]": "]" # 保持半角
+    "/": "/" # 顿号用 '\' 输入
     "'": { pair: ["「", "」"] } # 括号
   half_shape: *punctuator
 

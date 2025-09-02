@@ -2,7 +2,7 @@ patch:
   # 显示状态变化的通知
   show_notifications: true
   # 通知显示多长时间
-  show_notifications_time: 1200
+  show_notifications_time: 200
   # 切换为 ascii 模式时，是否影响所有窗口
   global_ascii: false
 
