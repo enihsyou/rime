@@ -33,6 +33,8 @@ patch:
       # - { when: always, accept: Shift+Shift_L, set_option: ascii_mode }
       # 长按 Control 切换到中文状态
       - { when: always, accept: Control+Control_R, unset_option: ascii_mode }
+      # Alt 无法被捕获
+      # - { when: always, accept: Alt+Alt_R, unset_option: ascii_mode }
 
       # Vim like keybindings from default preset
       - { when: composing, accept: "Control+p", send: Up }
