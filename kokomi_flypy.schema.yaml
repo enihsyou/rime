@@ -69,8 +69,8 @@ key_binder:
   import_preset: default
 
 speller:
-  # 允许大写字母开头输入英语
-  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
+  # 允许大写字母开头输入英语，允许短横线进入候选编码
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA-
   delimiter: " '"
   algebra:
     # 万象词库（需要在双拼前应用）
@@ -219,7 +219,7 @@ recognizer:
   patterns:
     # 关闭此功能，释放 backtick(`) 键
     reverse_lookup: ""
-    # 覆写默认的 uppercase 使其可以在输入大写后，输入数字
+    # 覆写默认的 uppercase 使其可以在输入大写后，使用数字激活候选词
     # 比如 IPv6 处在第二个候选位，不设置这个按 2 会无法选中它且候选窗变成了 IPv2
     uppercase: ""
 

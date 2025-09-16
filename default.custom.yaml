@@ -48,8 +48,9 @@ patch:
       - { when: composing, accept: "Control+h", send: BackSpace }
       - { when: composing, accept: "Control+g", send: Escape }
       # 翻页控制
-      - { when: has_menu, accept: minus, send: Page_Up }
-      - { when: has_menu, accept: equal, send: Page_Down }
+      # 想要中文状态下输入 -= 号，所以注释掉了
+      # - { when: has_menu, accept: minus, send: Page_Up }
+      # - { when: has_menu, accept: equal, send: Page_Down }
       - { when: paging, accept: bracketleft, send: Page_Up }
       - { when: has_menu, accept: bracketright, send: Page_Down }
       # 输入状态切换
