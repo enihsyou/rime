@@ -70,7 +70,9 @@ key_binder:
 
 speller:
   # 允许大写字母开头输入英语，允许短横线进入候选编码
-  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA-
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA-_.
+  # 单独输入符号直接上屏，不进入候选框
+  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
   delimiter: " '"
   algebra:
     # 万象词库（需要在双拼前应用）
@@ -213,6 +215,9 @@ punctuator:
     "/": "/" # 顿号用 '\' 输入
     "'": { pair: ["「", "」"] } # 括号
   half_shape: *punctuator
+  # 数字后按小数点/句号直接上屏
+  # https://github.com/rime/librime/blob/master/src/rime/gear/punctuator.cc
+  digit_separator_action: commit
 
 recognizer:
   import_preset: default
