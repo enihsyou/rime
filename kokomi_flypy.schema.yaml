@@ -35,7 +35,8 @@ switches:
 
 engine:
   processors:
-    - lua_processor@*reset_ascii_mode # 切换应用重置中英状态
+    # 有些过激了，不太习惯，先关了
+    # - lua_processor@*reset_ascii_mode # 切换应用重置中英状态
     - ascii_composer
     - recognizer
     - key_binder

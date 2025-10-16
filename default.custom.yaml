@@ -58,3 +58,5 @@ patch:
       # - { when: always, accept: "Control+Shift+at", toggle: ascii_mode }
       # - { when: always, accept: "Control+Shift+numbersign", toggle: full_shape }
       # - { when: always, accept: "Control+Shift+dollar", toggle: simplification }
+      # 删除误上屏的用户词 https://hongshi.qzz.io/post/61849
+      - { when: has_menu, accept: Control+Delete, send: unpublish_candidate }
