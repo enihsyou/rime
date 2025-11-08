@@ -36,7 +36,7 @@ switches:
 engine:
   processors:
     # 有些过激了，不太习惯，先关了
-    # - lua_processor@*reset_ascii_mode # 切换应用重置中英状态
+    - lua_processor@*reset_ascii_mode # 切换应用重置中英状态
     - ascii_composer
     - recognizer
     - key_binder
@@ -57,6 +57,7 @@ engine:
     - table_translator@translator_custom_phrase # 用户自定义词典
     - table_translator@translator_custom_private # 用户个人词典
     - script_translator
+    - echo_translator  # （無有其他結果時，）創建一個與編碼串一個模樣的候選項
   filters:
     - lua_filter@*corrector_filter # 错音错字提示
     - lua_filter@*super_preedit # 输入码显示全拼并带上音调
@@ -213,6 +214,8 @@ punctuator:
     ">": ">" # 保持半角
     "[": "[" # 保持半角
     "]": "]" # 保持半角
+    "|": "|" # 保持半角
+    "_": "_" # 保持半角
     "/": "/" # 顿号用 '\' 输入
     "'": { pair: ["「", "」"] } # 括号
   half_shape: *punctuator

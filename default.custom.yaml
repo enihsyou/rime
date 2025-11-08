@@ -12,7 +12,7 @@ patch:
   # 输入状态切换
   # https://gist.github.com/lotem/2981316
   ascii_composer:
-    # CapsLock 键作为输入法切换键
+    # CapsLock 键作为输入法切换键，并保持小写字母
     good_old_caps_lock: false
     switch_key:
       # librime v1.14.0 带来了 set/unset_ascii_mode, 能实现模式按键
@@ -21,7 +21,7 @@ patch:
       Caps_Lock: commit_code # 已输入字符上屏，同时切换模式
       Shift_L: noop
       Shift_R: noop
-      Control_L: noop # 已输入字符上屏，同时切换模式
+      Control_L: noop
       Control_R: noop
 
   # 注意需要在特定配置中使用 import_preset: default 才能生效
@@ -59,4 +59,5 @@ patch:
       # - { when: always, accept: "Control+Shift+numbersign", toggle: full_shape }
       # - { when: always, accept: "Control+Shift+dollar", toggle: simplification }
       # 删除误上屏的用户词 https://hongshi.qzz.io/post/61849
-      - { when: has_menu, accept: Control+Delete, send: unpublish_candidate }
+      # 但似乎 unpublished_candidate 不存在，先注释掉
+      # - { when: has_menu, accept: Control+Delete, send: unpublish_candidate }
