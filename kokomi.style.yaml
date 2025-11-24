@@ -24,6 +24,26 @@ app_options:
   firefox.exe:
     inline_preedit: true # 解决 Firefox 无法输入的问题 https://github.com/rime/weasel/issues/946
 
+win11_preset:
+  label_format: "%s"
+  layout:
+    align_type: center
+    baseline: 0
+    linespacing: 0
+    min_width: 10
+    margin_x: 13
+    margin_y: 7
+    border: 1
+    candidate_spacing: 20
+    hilite_spacing: 6
+    hilite_padding_x: 8
+    hilite_padding_y: 3
+    corner_radius: 8
+    hilited_corner_radius: 6
+    shadow_radius: 1
+    shadow_offset_x: 0
+    shadow_offset_y: 0
+
 style:
   color_scheme: win11_weasel # 主题方案
   color_scheme_dark: win11_weasel_dark # 暗色模式下的主题方案
@@ -82,23 +102,3 @@ preset_color_schemes:
     label_color: 0x727272
     shadow_color: 0x20000000
     text_color: 0xF9F9F9
-
-win11_preset:
-  label_format: "%s"
-  layout:
-    align_type: center
-    baseline: 0
-    linespacing: 0
-    min_width: 10
-    margin_x: 13
-    margin_y: 7
-    border: 1
-    candidate_spacing: 20
-    hilite_spacing: 6
-    hilite_padding_x: 8
-    hilite_padding_y: 3
-    corner_radius: 8
-    hilited_corner_radius: 6
-    shadow_radius: 1
-    shadow_offset_x: 0
-    shadow_offset_y: 0

@@ -35,8 +35,8 @@ switches:
 
 engine:
   processors:
-    # 有些过激了，不太习惯，先关了
     - lua_processor@*reset_ascii_mode # 切换应用重置中英状态
+    - lua_processor@*force_ascii_mode # 特定按键组合强制英文
     - ascii_composer
     - recognizer
     - key_binder
@@ -278,3 +278,8 @@ tag_user_dict:
   phrase: ""
   # 用户短语
   user_phrase: "🧑‍💻"
+
+# force_ascii_mode.lua
+force_ascii_mode:
+  trigger_inputs: # 在小鹤双拼上没意义但会和常用按键习惯冲突的输入
+    - jj # vim

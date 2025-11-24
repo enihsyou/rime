@@ -31,6 +31,7 @@ function M.func(key_event, env)
     -- such as windows switchment, alt+tab, mouse click,
     -- reset ascii_mode to default
     if (not key_event:release()) and key_event:repr() == "0x0000" then
+        -- additional check to avoid unnecessary status prompt by Weasel
         if not (context:get_option("ascii_mode") == M.default_ascii_mode) then
             context:set_option("ascii_mode", M.default_ascii_mode)
             return 1
