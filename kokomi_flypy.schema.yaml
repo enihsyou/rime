@@ -283,3 +283,14 @@ tag_user_dict:
 force_ascii_mode:
   trigger_inputs: # 在小鹤双拼上没意义但会和常用按键习惯冲突的输入
     - jj # vim
+    - win # windows, winget
+    - brew
+    - git
+    - http
+    - rm
+    - mv
+    - cp
+    - ps
+    - my # mysql
+    - "`" # markdown
+    - "["
