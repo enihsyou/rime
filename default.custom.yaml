@@ -25,6 +25,7 @@ patch:
       Control_R: noop
 
   # 注意需要在特定配置中使用 import_preset: default 才能生效
+  # 可用 accept 清单 https://github.com/LEOYoon-Tsaw/Rime_collections/blob/master/Rime_description.md
   key_binder:
     bindings:
       # 长按 Shift 切换到英文状态，为避免和快捷键冲突使用右侧按键
