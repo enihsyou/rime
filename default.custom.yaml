@@ -18,7 +18,7 @@ patch:
       # librime v1.14.0 带来了 set/unset_ascii_mode, 能实现模式按键
       # 当前小狼毫还没发布新版，但可以去 librime 下载 rime-e053fb2-Windows-msvc-x64.7z
       # 替换小狼毫使用的 DDL 文件引入新功能
-      Caps_Lock: commit_code # 已输入字符上屏，同时切换模式
+      Caps_Lock: inline_ascii
       Shift_L: noop
       Shift_R: noop
       Control_L: noop
@@ -34,11 +34,13 @@ patch:
       # - { when: always, accept: Shift+Shift_L, set_option: ascii_mode }
       # 长按 Control 切换到中文状态
       - { when: always, accept: Control+Control_R, unset_option: ascii_mode }
+      # 在发现输入状态为中文后按 Esc 键切换到英文状态，相比 ascii_composer 的好处是键盘不会亮灯
+      - { when: composing, accept: "Escape", send: "Caps_Lock" }
       # Alt 无法被捕获
       # - { when: always, accept: Alt+Alt_R, unset_option: ascii_mode }
 
       # Vim like keybindings from default preset
-      - { when: composing, accept: "Control+p", send: Up }
+      - { when: composing, accept: "Control+p", send: Up}
       - { when: composing, accept: "Control+n", send: Down }
       - { when: composing, accept: "Control+b", send: Left }
       - { when: composing, accept: "Control+f", send: Right }
@@ -48,6 +50,7 @@ patch:
       - { when: composing, accept: "Control+k", send: "Shift+Delete" }
       - { when: composing, accept: "Control+h", send: BackSpace }
       - { when: composing, accept: "Control+g", send: Escape }
+
       # 翻页控制
       # 想要中文状态下输入 -= 号，所以注释掉了
       # - { when: has_menu, accept: minus, send: Page_Up }
