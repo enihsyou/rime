@@ -12,32 +12,23 @@ patch:
   # 输入状态切换
   # https://gist.github.com/lotem/2981316
   ascii_composer:
-    # CapsLock 键作为输入法切换键，并保持小写字母
-    good_old_caps_lock: false
     switch_key:
       # librime v1.14.0 带来了 set/unset_ascii_mode, 能实现模式按键
-      # 当前小狼毫还没发布新版，但可以去 librime 下载 rime-e053fb2-Windows-msvc-x64.7z
-      # 替换小狼毫使用的 DDL 文件引入新功能
-      Caps_Lock: inline_ascii
-      Shift_L: noop
-      Shift_R: noop
-      Control_L: noop
-      Control_R: noop
+      # 当前小狼毫还没发布新版，但可以去下载 Nightly 版本
+      Shift_R: set_ascii_mode
+      # 小狼毫目前未实现 XK_Eisu_toggle 按键转换，也就无法使用这个按键来切换中英状态
+      # 但是能够通过 key_binder 来模拟按下这个按键
+      Eisu_toggle: clear
 
   # 注意需要在特定配置中使用 import_preset: default 才能生效
   # 可用 accept 清单 https://github.com/LEOYoon-Tsaw/Rime_collections/blob/master/Rime_description.md
   key_binder:
     bindings:
-      # 长按 Shift 切换到英文状态，为避免和快捷键冲突使用右侧按键
-      - { when: always, accept: Shift+Shift_R, set_option: ascii_mode }
-      # 实践中每次使用 Shift 输入大写开头的字符时，都会想要输入一串英文
-      # - { when: always, accept: Shift+Shift_L, set_option: ascii_mode }
-      # 长按 Control 切换到中文状态
-      - { when: always, accept: Control+Control_R, unset_option: ascii_mode }
+      # 按下 CapsLock 切换到中文状态，需要与 PowerToys 配合
+      - { when: always, accept: Control+F22, unset_option: ascii_mode }
       # 在发现输入状态为中文后按 Esc 键切换到英文状态，相比 ascii_composer 的好处是键盘不会亮灯
-      - { when: composing, accept: "Escape", send: "Caps_Lock" }
-      # Alt 无法被捕获
-      # - { when: always, accept: Alt+Alt_R, unset_option: ascii_mode }
+      # 利用隐藏的逻辑 https://github.com/rime/librime/blob/de4700e9f6b75b109910613df907965e3cbe0567/src/rime/gear/ascii_composer.cc#L74
+      - { when: composing, accept: "Escape", send: "Eisu_toggle" }
 
       # Vim like keybindings from default preset
       - { when: composing, accept: "Control+p", send: Up}
