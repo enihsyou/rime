@@ -206,22 +206,28 @@ punctuator:
   import_preset: default
   # 定义部分半角字符，方便中英混输
   full_shape: &punctuator
-    "#": "#" # Markdown 标题
-    "*": "*" # Markdown 加粗
-    "`": "`" # Markdown 代码
-    '"': '"' # 按下 Shift 说明我们要半角引号
-    "<": "<" # 保持半角
-    ">": ">" # 保持半角
-    "[": "[" # 保持半角
-    "]": "]" # 保持半角
-    "|": "|" # 保持半角
-    "_": "_" # 保持半角
-    "/": "/" # 顿号用 '\' 输入
+    "#": {"commit": "#"} # Markdown 标题
+    "*": {"commit": "*"} # Markdown 加粗
+    "`": {"commit": "`"} # Markdown 代码
+    '"': {"commit": '"'} # 按下 Shift 说明我们要半角引号
+    "$": {"commit": "$"} # 保持半角
+    "<": {"commit": "<"} # 保持半角
+    ">": {"commit": ">"} # 保持半角
+    "[": {"commit": "["} # 保持半角
+    "]": {"commit": "]"} # 保持半角
+    "|": {"commit": "|"} # 保持半角
+    "-": {"commit": "-"} # 保持半角
+    "+": {"commit": "+"} # 保持半角
+    "=": {"commit": "="} # 保持半角
+    "_": {"commit": "_"} # 保持半角
+    "/": {"commit": "/"} # 顿号用 '\' 输入
     "'": { pair: ["「", "」"] } # 括号
   half_shape: *punctuator
   # 数字后按小数点/句号直接上屏
   # https://github.com/rime/librime/blob/master/src/rime/gear/punctuator.cc
   digit_separator_action: commit
+  # 扩大识别为数字的范围
+  digit_separators: ",.:/"
 
 recognizer:
   import_preset: default
