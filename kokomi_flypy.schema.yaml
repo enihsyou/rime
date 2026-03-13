@@ -57,7 +57,9 @@ engine:
     - table_translator@translator_custom_phrase # 用户自定义词典
     - table_translator@translator_custom_private # 用户个人词典
     - script_translator
-    - echo_translator  # （無有其他結果時，）創建一個與編碼串一個模樣的候選項
+    # （無有其他結果時，）創建一個與編碼串一個模樣的候選項
+    # 但是不使用这个，否则在输入标点时会进入候选框
+    # - echo_translator
   filters:
     - lua_filter@*corrector_filter # 错音错字提示
     - lua_filter@*super_preedit # 输入码显示全拼并带上音调
@@ -205,23 +207,24 @@ translator_en:
 punctuator:
   import_preset: default
   # 定义部分半角字符，方便中英混输
+  # 需要在键后面添加 "/=" 来替换掉与 default 不同类型的 value
   full_shape: &punctuator
-    "#": {"commit": "#"} # Markdown 标题
-    "*": {"commit": "*"} # Markdown 加粗
-    "`": {"commit": "`"} # Markdown 代码
-    '"': {"commit": '"'} # 按下 Shift 说明我们要半角引号
-    "$": {"commit": "$"} # 保持半角
-    "<": {"commit": "<"} # 保持半角
-    ">": {"commit": ">"} # 保持半角
-    "[": {"commit": "["} # 保持半角
-    "]": {"commit": "]"} # 保持半角
-    "|": {"commit": "|"} # 保持半角
-    "-": {"commit": "-"} # 保持半角
-    "+": {"commit": "+"} # 保持半角
-    "=": {"commit": "="} # 保持半角
-    "_": {"commit": "_"} # 保持半角
-    "/": {"commit": "/"} # 顿号用 '\' 输入
-    "'": { pair: ["「", "」"] } # 括号
+    "#/=": "#" # Markdown 标题
+    "*/=": "*" # Markdown 加粗
+    "`/=": "`" # Markdown 代码
+    '"/=': '"' # 按下 Shift 说明我们要半角引号
+    "$/=": "$" # 保持半角
+    "</=": "<" # 保持半角
+    ">/=": ">" # 保持半角
+    "[/=": "[" # 保持半角
+    "]/=": "]" # 保持半角
+    "|/=": "|" # 保持半角
+    "-/=": "-" # 保持半角
+    "+/=": "+" # 保持半角
+    "=/=": "=" # 保持半角
+    "_/=": "_" # 保持半角
+    "//=": "/" # 顿号用 '\' 输入
+    "'/=": { pair: ["「", "」"] } # 括号
   half_shape: *punctuator
   # 数字后按小数点/句号直接上屏
   # https://github.com/rime/librime/blob/master/src/rime/gear/punctuator.cc
