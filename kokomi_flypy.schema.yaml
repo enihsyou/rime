@@ -301,5 +301,3 @@ force_ascii_mode:
     - cp
     - ps
     # - my # mysql
-    - "`" # markdown
-    - "["
