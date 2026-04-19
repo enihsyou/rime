@@ -134,6 +134,7 @@ UTF-8	utf	3
 UTF-16	utf	2
 UTF-32	utf	1
 U盘	upj
+Vim	vim
 WeChat	wechat
 Wi-Fi	wifi
 Windows	win
